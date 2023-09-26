@@ -24,7 +24,7 @@ export default function App() {
   });
 
   return <>
-  {healthStatus === 'OK' ? <ListScreen /> : <div>Loading Screen</div>}
+  {healthStatus === 'OK' ? <ListScreen /> : <div>Loading Screen...</div>}
   {healthStatus !== 'OK' && <div>Retry Action widget</div>}
   </>;
 }

@@ -27,20 +27,11 @@ export default function ListScreen() {
 
   return (
     <div>
-      {questionsList.map((question) => (
-        <div key={question.id}>
-          <h3>
-            {question.id} {question.question}
-          </h3>
-          <ul>
-            {question.choices.map((choice, i) => (
-              <li key={choice[i]}>
-                Language: {choice.choice} Votes: {choice.votes}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <ol>
+        {questionsList.map((question) => (
+          <li key={question.id}>{question.question}</li>
+        ))}
+      </ol>
     </div>
   );
 }
