@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ListScreen from './ListScreen';
+import DetailScreen from './DetailScreen';
 
 export default function App() {
   const [healthStatus, setHealthStatus] = useState('');
@@ -24,7 +25,7 @@ export default function App() {
   });
 
   return <>
-  {healthStatus === 'OK' ? <ListScreen /> : <div>Loading Screen...</div>}
+  {healthStatus === 'OK' ? <DetailScreen /> : <div>Loading Screen...</div>}
   {healthStatus !== 'OK' && <div>Retry Action widget</div>}
   </>;
 }

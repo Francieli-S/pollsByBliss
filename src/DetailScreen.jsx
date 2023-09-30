@@ -4,16 +4,14 @@ import { useEffect, useState } from 'react';
 export default function DetailScreen() {
   const [questionDetails, setQuestionsDetails] = useState();
 
-  const question_id = 1;
+  const question_id = 3;
 
   const axiosDetails = async () => {
     try {
       const response = await axios.get(
         `https://private-anon-1212ecd341-blissrecruitmentapi.apiary-mock.com/questions/${question_id}`
       );
-      console.log(response.status);
       if (response.status === 200) {
-        console.log('DETAIL', response.data);
         setQuestionsDetails(response.data);
       }
     } catch (error) {
@@ -23,7 +21,27 @@ export default function DetailScreen() {
 
   useEffect(() => {
     axiosDetails();
-  }, [question_id]);
+  }, [questionDetails]);
+
+  const handleUpdate = async (e) => {
+    const option = e.target.name
+
+    questionDetails.choices.find(choice => {
+      if (choice.choice === option) {
+        choice.votes++
+      }
+    })
+    console.log('updateddd', questionDetails.choices)
+    try {
+      const body = {
+        ...questionDetails
+      } 
+      const response = await axios.put(`https://private-anon-f3fe99d5da-blissrecruitmentapi.apiary-mock.com/questions/${question_id}`, body)
+      console.log('UPDATING', response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return questionDetails ? (
     <div>
@@ -36,7 +54,10 @@ export default function DetailScreen() {
       <ul>
         {questionDetails.choices.map((choice, i) => (
           <li key={choice[i]}>
-            Language: {choice.choice} Votes: {choice.votes}
+            {choice.choice} - {choice.votes} votes
+            <button type='button' name={choice.choice} onClick={handleUpdate}>
+              Vote
+            </button>
           </li>
         ))}
       </ul>
