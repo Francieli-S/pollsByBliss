@@ -11,7 +11,7 @@ export default function ListScreen() {
   const axiosQuestions = async () => {
     try {
       const response = await axios.get(
-        `https://private-anon-205e1ac56d-blissrecruitmentapi.apiary-mock.com/questions?limit=${limit}&offset=${offset}&filter=${filter}`
+        `https://private-bbbe9-blissrecruitmentapi.apiary-mock.com/questions?limit=${limit}&offset=${offset}&filter=${filter}`        
       );
       if (response.status === 200) {
         setQuestionsList(response.data);
